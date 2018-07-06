@@ -1,0 +1,1 @@
+include ':app', ':module_sns', ':module_outsale', ':comment_basic', ':comment_data'

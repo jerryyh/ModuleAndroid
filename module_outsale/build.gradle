@@ -1,0 +1,53 @@
+if (Boolean.valueOf(rootProject.ext.moduleOutSale)) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+apply plugin: 'me.tatarka.retrolambda'  //lambda配置
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //Arouter路由配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+        //强制前缀
+        resourcePrefix "mall_"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility org.gradle.api.JavaVersion.VERSION_1_8
+        targetCompatibility org.gradle.api.JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api rootProject.ext.dependencies["constraint_layout"]
+    testApi rootProject.ext.dependencies["junit"]
+    api rootProject.ext.dependencies["appcompat_v7"]
+    androidTestApi rootProject.ext.dependencies["runner"]
+    androidTestApi rootProject.ext.dependencies["espresso_core"]
+    annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
+    implementation project(':comment_basic')
+    implementation project(':comment_data')
+}
