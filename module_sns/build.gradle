@@ -3,11 +3,13 @@ if (Boolean.valueOf(rootProject.ext.moduleSns)) {
 } else {
     apply plugin: 'com.android.library'
 }
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
     defaultConfig {
+        multiDexEnabled true
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
@@ -66,4 +68,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':comment_basic')
     implementation project(':comment_data')
+    //黄油刀
+    annotationProcessor rootProject.ext.dependencies["butterknife_compiler"]
 }

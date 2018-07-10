@@ -74,7 +74,9 @@ ext{
             //eventbus
             "eventbus"                       : 'org.greenrobot:eventbus:3.0.0',
             //baseRecyclerViewAdapterHelper
+
             "baseRecyclerViewAdapterHelper"  : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22',
+
             //Bugly集成
             "bugly"                          : 'com.tencent.bugly:crashreport_upgrade:latest.release',
             //仿ios进度条

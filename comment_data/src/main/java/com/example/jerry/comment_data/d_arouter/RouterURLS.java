@@ -11,5 +11,5 @@ public interface RouterURLS {
     String MEMBER_INFORMATION = "/member/information";
     String BASE_MAIN = "/base/main";
     String MALL_MAIN= "/mall/main/activity";
-
+    String MALL_MVP_ACTIVITY="/mall/mvp/activity";
 }

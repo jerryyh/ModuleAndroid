@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -26,7 +26,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    dataBinding {
+        enabled true
+    }
 }
 
 dependencies {
@@ -36,6 +38,11 @@ dependencies {
     androidTestApi rootProject.ext.dependencies["runner"]
     androidTestApi rootProject.ext.dependencies["espresso_core"]
     api rootProject.ext.dependencies["appcompat_v7"]
+    api rootProject.ext.dependencies["recyclerview-v7"]
+    api rootProject.ext.dependencies["support-v4"]
+    api rootProject.ext.dependencies["design"]
+    api rootProject.ext.dependencies["cardview-v7"]
+    api rootProject.ext.dependencies["support_annotations"]
     //MultiDex分包方法
     api rootProject.ext.dependencies["multidex"]
 
@@ -43,4 +50,51 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["arouter_compiler"]
     api rootProject.ext.dependencies["arouter_api"]
     api rootProject.ext.dependencies["arouter_annotation"]
+
+
+    api rootProject.ext.dependencies["retrofit2"]
+    api rootProject.ext.dependencies["converter-gson"]
+    api rootProject.ext.dependencies["adapter-rxjava2"]
+    api rootProject.ext.dependencies["rxjava2:rxandroid"]
+    api rootProject.ext.dependencies["rxjava2"]
+    api rootProject.ext.dependencies["logging-interceptor"]
+    //黄油刀
+    annotationProcessor rootProject.ext.dependencies["butterknife_compiler"]
+    api rootProject.ext.dependencies["butterknife"]
+    //日志
+    api rootProject.ext.dependencies["logger"]
+    //仿ios进度条
+    //api rootProject.ext.dependencies["kprogresshud"]
+    //6.0权限
+    api rootProject.ext.dependencies["permissionsdispatcher"]
+    api rootProject.ext.dependencies["baseRecyclerViewAdapterHelper"]
+    //图片
+    api rootProject.ext.dependencies["glide"]
+    //图片选择器 导致夜神在模拟器打不开
+    api rootProject.ext.dependencies["PictureSelector"]
+    //图片缩放,View Pager中浏览库
+    api rootProject.ext.dependencies["photoview"]
+    //仿ios 的PickerView时间选择器和条件选择器
+    api rootProject.ext.dependencies["pickerView"]
+    //上拉加载
+    api rootProject.ext.dependencies["smartRefreshLayout"]
+    api rootProject.ext.dependencies["SmartRefreshHeader"]
+    //eventbus 发布/订阅事件总线
+    api rootProject.ext.dependencies["eventbus"]
+    //banner轮播图
+    api rootProject.ext.dependencies["banner"]
+    //RecyclerView万能适配器
+    api rootProject.ext.dependencies["baseRecyclerViewAdapterHelper"]
+    //Android屏幕适配
+    api rootProject.ext.dependencies["autolayout"]
+    //安卓调试神器-Stetho
+    api rootProject.ext.dependencies["stetho"]
+    api rootProject.ext.dependencies["stetho-okhttp3"]
+    //bugly sdk
+    api rootProject.ext.dependencies["tencent-bugly"]
+    //节操播放器
+    api rootProject.ext.dependencies["jiecao"]
+
+
+    implementation project(':comment_data')
 }

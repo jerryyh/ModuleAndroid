@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.i("tag","000000");
-                RouterCenter.toOutSale();
+                RouterCenter.toMvpTest();
             }
         });
     }
