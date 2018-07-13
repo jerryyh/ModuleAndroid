@@ -32,10 +32,19 @@ public class BaseHost {
             case HostType.NEWS_DETAIL_HTML_PHOTO:
                 host = "http://kaku.com/";
                 break;
+
+            case HostType.NEWS_DETAIL_HTML_PHOTO2:
+                host = "http://mappsns.lppz.com/services/";
+                break;
             default:
                 host = "";
                 break;
         }
         return host;
+    }
+
+    public static String getUrl(int hostType,String host){
+
+        return getHost(hostType)+host;
     }
 }

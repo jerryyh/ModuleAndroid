@@ -3,8 +3,6 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
-
-
     defaultConfig {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion  rootProject.ext.android.targetSdkVersion
@@ -29,5 +27,4 @@ dependencies {
     androidTestApi rootProject.ext.dependencies["runner"]
     androidTestApi rootProject.ext.dependencies["espresso_core"]
     api rootProject.ext.dependencies["appcompat_v7"]
-
 }

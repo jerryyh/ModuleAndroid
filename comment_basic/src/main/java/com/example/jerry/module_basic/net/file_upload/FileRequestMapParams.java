@@ -1,5 +1,6 @@
 package com.example.jerry.module_basic.net.file_upload;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -123,6 +124,11 @@ public class FileRequestMapParams implements FileRequestMapBuild {
         mBuilder.addFormDataPart("timeStamp", String.valueOf(System.currentTimeMillis()));
         //mBuilder.addFormDataPart("sign", createSign(mBuilder, "key"));//文件上传没有加入sign
         return mBuilder.build();
+    }
+
+    @Override
+    public MultipartBody parmsbuild(Context context) {
+        return null;
     }
 
     private Gson getGson() {

@@ -1,5 +1,7 @@
 package com.example.jerry.module_basic.net.params;
 
+import android.content.Context;
+
 import java.util.Map;
 
 /**
@@ -10,7 +12,7 @@ import java.util.Map;
 public interface RequestMapBuild<P> {
 
     P build();
-
+    P parmsbuild(Context context);
     RequestMapBuild<P> put(String key, String value);
 
     RequestMapBuild<P> put(String key, Object value);

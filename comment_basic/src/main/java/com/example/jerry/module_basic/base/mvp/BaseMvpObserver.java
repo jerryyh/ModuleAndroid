@@ -42,6 +42,12 @@ public abstract class BaseMvpObserver<T> extends ResourceObserver<T> {
     public BaseMvpObserver() {
     }
 
+
+    @Override
+    public void onNext(T t) {
+
+    }
+
     public BaseMvpObserver(IView view) {
         this.mView = view ;
     }
