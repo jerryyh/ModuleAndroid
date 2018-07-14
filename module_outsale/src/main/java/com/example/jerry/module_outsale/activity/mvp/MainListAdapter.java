@@ -11,7 +11,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.jerry.module_outsale.R;
 import com.example.jerry.module_outsale.activity.bean.FeedArticleData;
 
-
 import java.util.List;
 
 /**
@@ -22,7 +21,7 @@ import java.util.List;
 
 public class MainListAdapter extends BaseQuickAdapter<FeedArticleData, BaseViewHolder> {
 
-   private boolean isSearchPage = false;
+    private boolean isSearchPage = false;
     private boolean isCollectPage = false;
 
     public MainListAdapter(@Nullable List<FeedArticleData> data) {

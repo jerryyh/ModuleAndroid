@@ -11,9 +11,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.example.jerry.module_basic.observer.ActivityObservable;
+import com.example.jerry.module_basic.observer.Observer;
+import com.example.jerry.module_basic.util.ToastUtils;
 import com.example.jerry.module_sns.arouter.RouterCenter;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * 观察者对象
+ */
+public class MainActivity extends AppCompatActivity implements Observer{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
                 RouterCenter.toMvpTest();
             }
         });
+
+        ActivityObservable.getInstance().registerObserver(this);
     }
 
     @Override
@@ -55,5 +63,18 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void action(int id, Object... objects) {
+       if(id==1){
+           ToastUtils.showShort(this, "99999999");
+       }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityObservable.getInstance().unRegisterObserver(this);
     }
 }

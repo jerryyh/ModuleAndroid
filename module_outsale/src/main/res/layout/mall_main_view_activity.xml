@@ -11,6 +11,7 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:text="测试数据"
+        android:visibility="visible"
         android:layout_height="wrap_content" />
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -31,7 +32,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
+            <com.scwang.smartrefresh.header.PhoenixHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
@@ -39,7 +42,9 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             </android.support.v7.widget.RecyclerView>
-
+            <com.scwang.smartrefresh.header.TaurusHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     </android.support.design.widget.CoordinatorLayout>

@@ -1,14 +1,11 @@
 package com.example.jerry.module_basic.net;
 
-import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import android.util.SparseArray;
 
 import com.example.jerry.comment_data.constant.BaseHost;
 import com.example.jerry.comment_data.constant.HostType;
 import com.example.jerry.module_basic.BuildConfig;
 import com.example.jerry.module_basic.base.BaseApplication;
-import com.example.jerry.module_basic.util.NetUtils;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -18,7 +15,6 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
-import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -112,12 +108,40 @@ public class ApiHelper {
                 .build();
     }
 
+    private static ApiHelper retrofitManager;
+
     public static Retrofit getDefault(int hostType) {
         ApiHelper retrofitManager = sRetrofitManager.get(hostType);
         if (retrofitManager == null) {
             retrofitManager = new ApiHelper(hostType);
             sRetrofitManager.put(hostType, retrofitManager);
         }
+//        if (retrofitManager == null) {
+//            synchronized (ApiHelper.class) {
+//                if (retrofitManager == null) {
+//                    retrofitManager = new ApiHelper(hostType);
+//                }
+//            }
+//        }
+        ApiHelper instance = ApiHelper.getInstance();//静态内部类单例模式
         return retrofit;
+    }
+
+
+    //私有的构造方法，防止new
+    private ApiHelper() {
+
+    }
+
+    public static ApiHelper getInstance() {
+        return ApiHelperHolder.instance;
+    }
+
+    /**
+     * 静态内部类
+     */
+    private static class ApiHelperHolder {
+        //第一次加载内部类的时候，实例化单例对象
+        private static final ApiHelper instance = new ApiHelper();
     }
 }

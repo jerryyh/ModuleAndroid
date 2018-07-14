@@ -7,6 +7,7 @@ import android.widget.Button;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.jerry.comment_data.d_arouter.RouterURLS;
 import com.example.jerry.module_basic.base.mvp.BaseMvpListActivity;
+import com.example.jerry.module_basic.observer.ActivityObservable;
 import com.example.jerry.module_outsale.R;
 import com.example.jerry.module_outsale.R2;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -15,6 +16,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
+ *
  * Created by jerry on 2018/7/6.
  */
 @Route(path = RouterURLS.MALL_MVP_ACTIVITY)
@@ -28,7 +30,12 @@ public class MainViewActivity extends BaseMvpListActivity<MainContract.View, Mai
     Button button;
 
     @Override
-    protected int getLayout() {
+    protected void initTitle() {
+
+    }
+
+    @Override
+    protected int getLayoutId() {
         return R.layout.mall_main_view_activity;
     }
 
@@ -62,5 +69,7 @@ public class MainViewActivity extends BaseMvpListActivity<MainContract.View, Mai
     @OnClick(R2.id.button)
     public void onClick() {
         mPresenter.getPopuPageResult();
+        //提醒观察者更新
+        ActivityObservable.getInstance().notifyObservers(1,"99999999");
     }
 }

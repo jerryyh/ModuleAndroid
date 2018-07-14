@@ -23,13 +23,18 @@ public abstract class BaseMvpActivity<V extends IView, P extends IPresenter<V>> 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayout());
+        setContentView(getLayoutId());
         unBinder = ButterKnife.bind(this);
         onViewCreated();
+        initTitle();
         initView();
     }
+    /**
+     * 初始化标题
+     */
+    protected abstract void initTitle();
 
-    protected abstract int getLayout();
+    protected abstract int getLayoutId();
 
     protected abstract void initView();
 

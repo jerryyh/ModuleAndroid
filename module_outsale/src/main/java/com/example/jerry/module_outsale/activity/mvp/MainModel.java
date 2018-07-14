@@ -4,7 +4,6 @@ import com.example.jerry.comment_data.bean.BaseObj;
 import com.example.jerry.comment_data.bean.bean.BaseObj2;
 import com.example.jerry.comment_data.constant.BaseHost;
 import com.example.jerry.module_basic.base.mvp.DisposablePool;
-import com.example.jerry.module_basic.net.params.RequestMapBuild;
 import com.example.jerry.module_basic.net.params.RequestMapParams;
 import com.example.jerry.module_basic.util.DeviceUtil;
 import com.example.jerry.module_outsale.activity.api.ApiService;
