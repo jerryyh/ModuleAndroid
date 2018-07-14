@@ -1,20 +1,19 @@
-ext{
+ext {
     isModule = false
     moduleSns = false
     moduleOutSale = false
 
 
     android = [
-            compileSdkVersion   : 27,
-            buildToolsVersion   : '27.0.2',
-            minSdkVersion       : 17,
-            targetSdkVersion    : 23,
-            versionCode         : 1,
-            versionName         : "1.0.0",
-            applicationId       : "com.example.jerry.moduleandroid",
+            compileSdkVersion       : 27,
+            buildToolsVersion       : '27.0.2',
+            minSdkVersion           : 17,
+            targetSdkVersion        : 23,
+            versionCode             : 1,
+            versionName             : "1.0.0",
+            applicationId           : "com.example.jerry.moduleandroid",
 
             androidSupportSdkVersion: "27.0.2"
-
 
 
     ]
@@ -85,21 +84,24 @@ ext{
             "permissionsdispatcher"          : 'com.github.hotchemi:permissionsdispatcher:3.0.1',
             "permissionsdispatcher_processor": 'com.github.hotchemi:permissionsdispatcher-processor:3.0.1',
             //dagger 暂时没用
-            "dagger"                        : 'com.google.dagger:dagger:2.0.2',
-            "dagger-compiler"               : 'com.google.dagger:dagger-compiler:2.0.2',
-            "javax-annotation"              : 'org.glassfish:javax.annotation:10.0-b28',
+            "dagger"                         : 'com.google.dagger:dagger:2.15',
+            "dagger-compiler"                : 'com.google.dagger:dagger-compiler:2.15',
+            "dagger-android"                 : 'com.google.dagger:dagger-android:2.15',
+            "dagger-android-support"         : 'com.google.dagger:dagger-android-support:2.15',
+            "dagger-android-processor"       : 'com.google.dagger:dagger-android-processor:2.15',
+            "javax-annotation"               : 'org.glassfish:javax.annotation:10.0-b28',
             //greendao
-            "greendao"                      : 'org.greenrobot:greendao:3.2.2',
+            "greendao"                       : 'org.greenrobot:greendao:3.2.2',
             //Android屏幕适配
-            "autolayout"                      : 'com.zhy:autolayout:1.4.5',
+            "autolayout"                     : 'com.zhy:autolayout:1.4.5',
             //安卓调试神器-Stetho
-            "stetho"                      : 'com.facebook.stetho:stetho:1.5.0',
-            "stetho-okhttp3"                      : 'com.facebook.stetho:stetho-okhttp3:1.5.0',
+            "stetho"                         : 'com.facebook.stetho:stetho:1.5.0',
+            "stetho-okhttp3"                 : 'com.facebook.stetho:stetho-okhttp3:1.5.0',
             // 仿ios弹出对话窗体
             "alertview"                      : 'com.bigkoo:alertview:1.0.3',
             //bugly sdk
-            "tencent-bugly"            : 'com.tencent.bugly:crashreport_upgrade:latest.release',
+            "tencent-bugly"                  : 'com.tencent.bugly:crashreport_upgrade:latest.release',
             //节操播放器
-            "jiecao"            : 'fm.jiecao:jiecaovideoplayer:5.7',
+            "jiecao"                         : 'fm.jiecao:jiecaovideoplayer:5.7',
     ]
 }

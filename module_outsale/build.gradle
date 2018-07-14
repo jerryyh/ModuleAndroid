@@ -6,6 +6,7 @@ if (Boolean.valueOf(rootProject.ext.moduleOutSale)) {
 apply plugin: 'me.tatarka.retrolambda'  //lambda配置
 //apply plugin: 'com.android.databinding'
 apply plugin: 'com.jakewharton.butterknife'
+//apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -56,4 +57,14 @@ dependencies {
     implementation project(':comment_data')
     //黄油刀
     annotationProcessor rootProject.ext.dependencies["butterknife_compiler"]
+//    api rootProject.ext.dependencies["dagger"]
+//    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+//    api rootProject.ext.dependencies["javax-annotation"]
+
+    implementation rootProject.ext.dependencies["dagger"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+    implementation rootProject.ext.dependencies["dagger-android"]
+    implementation rootProject.ext.dependencies["dagger-android-support"]
+    annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]
+    implementation rootProject.ext.dependencies["javax-annotation"]
 }

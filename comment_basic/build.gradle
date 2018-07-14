@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.jakewharton.butterknife'
+//apply plugin: 'com.neenbedankt.android-apt'
+//apply plugin: 'android-apt'
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
 
@@ -33,8 +35,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     testApi rootProject.ext.dependencies["junit"]
-    androidTestApi rootProject.ext.dependencies["runner"]
-    androidTestApi rootProject.ext.dependencies["espresso_core"]
+    androidTestImplementation rootProject.ext.dependencies["runner"]
+    androidTestImplementation rootProject.ext.dependencies["espresso_core"]
     api rootProject.ext.dependencies["appcompat_v7"]
     api rootProject.ext.dependencies["recyclerview-v7"]
     api rootProject.ext.dependencies["support-v4"]
@@ -93,6 +95,25 @@ dependencies {
     //节操播放器
     api rootProject.ext.dependencies["jiecao"]
 
+    implementation rootProject.ext.dependencies["dagger"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+    implementation rootProject.ext.dependencies["dagger-android"]
+    implementation rootProject.ext.dependencies["dagger-android-support"]
+    annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]
+    implementation rootProject.ext.dependencies["javax-annotation"]
 
     implementation project(':comment_data')
+
+
+//解决支持库版本不兼容问题
+//    configurations.all {
+//        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//            def requested = details.requested
+//            if (requested.group == 'com.android.support') {
+//                if (!requested.name.startsWith("multidex")) {
+//                    details.useVersion '25.3.0'
+//                }
+//            }
+//        }
+//    }
 }

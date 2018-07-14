@@ -1,6 +1,8 @@
 package com.example.jerry.module_outsale.activity.mvp;
 
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 
@@ -10,13 +12,16 @@ import com.example.jerry.module_basic.base.mvp.BaseMvpListActivity;
 import com.example.jerry.module_basic.observer.ActivityObservable;
 import com.example.jerry.module_outsale.R;
 import com.example.jerry.module_outsale.R2;
+import com.example.jerry.module_outsale.activity.component.DaggerMainActivityComponent;
+import com.example.jerry.module_outsale.activity.module.MainActivityModule;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- *
  * Created by jerry on 2018/7/6.
  */
 @Route(path = RouterURLS.MALL_MVP_ACTIVITY)
@@ -28,6 +33,8 @@ public class MainViewActivity extends BaseMvpListActivity<MainContract.View, Mai
     SmartRefreshLayout srlLayout;
     @BindView(R2.id.button)
     Button button;
+    @Inject
+    MainPrenter presenter;
 
     @Override
     protected void initTitle() {
@@ -52,7 +59,11 @@ public class MainViewActivity extends BaseMvpListActivity<MainContract.View, Mai
 
     @Override
     public MainContract.Presenter createPresenter() {
-        return new MainPrenter(this, recyclerView);
+        DaggerMainActivityComponent
+                .builder()
+                .mainActivityModule(new MainActivityModule(this,recyclerView))
+                .build().inject(this);
+        return presenter;
     }
 
     @Override
@@ -70,6 +81,6 @@ public class MainViewActivity extends BaseMvpListActivity<MainContract.View, Mai
     public void onClick() {
         mPresenter.getPopuPageResult();
         //提醒观察者更新
-        ActivityObservable.getInstance().notifyObservers(1,"99999999");
+        ActivityObservable.getInstance().notifyObservers(1, "99999999");
     }
 }

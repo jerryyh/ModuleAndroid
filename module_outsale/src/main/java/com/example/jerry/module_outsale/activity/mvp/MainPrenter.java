@@ -22,6 +22,8 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -31,11 +33,13 @@ import io.reactivex.schedulers.Schedulers;
 public class MainPrenter extends BasePresenter<MainContract.View, MainContract.Model> implements MainContract.Presenter {
 
     private List<FeedArticleData> mFeedArticleDataList;
-    private RecyclerView mRecyclerView;
     private MainListAdapter mAdapter;
     private boolean mIsRefresh;
-    private Context mActivity;
+    RecyclerView mRecyclerView;
+    Context mActivity;
 
+
+    @Inject
     public MainPrenter(Context acticity, RecyclerView recyclerView) {
         this.mActivity = acticity;
         mRecyclerView = recyclerView;
@@ -53,29 +57,31 @@ public class MainPrenter extends BasePresenter<MainContract.View, MainContract.M
     }
 
     private void initRecyclerView() {
-        mFeedArticleDataList = new ArrayList<>();
-        mAdapter = new MainListAdapter(mFeedArticleDataList);
-        mAdapter.openLoadAnimation();
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                L.d("点击了条目");
-            }
-        });
-        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                L.d("点击了子条目");
-            }
-        });
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setSpanSizeLookup(new BaseQuickAdapter.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(GridLayoutManager gridLayoutManager, int position) {
-                return 2;
-            }
-        });
+        if (mRecyclerView != null) {
+            mFeedArticleDataList = new ArrayList<>();
+            mAdapter = new MainListAdapter(mFeedArticleDataList);
+            mAdapter.openLoadAnimation();
+            mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    L.d("点击了条目");
+                }
+            });
+            mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                @Override
+                public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                    L.d("点击了子条目");
+                }
+            });
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
+            mRecyclerView.setAdapter(mAdapter);
+            mAdapter.setSpanSizeLookup(new BaseQuickAdapter.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(GridLayoutManager gridLayoutManager, int position) {
+                    return 2;
+                }
+            });
+        }
     }
 
     private void showArticleList(FeedArticleListData feedArticleListData) {
@@ -96,31 +102,31 @@ public class MainPrenter extends BasePresenter<MainContract.View, MainContract.M
     public void FeedArticleList(boolean isRefresh, SmartRefreshLayout rlRefreshLayout, int page) {
         mIsRefresh = isRefresh;
         addDisposable(mModel.getFeedArticleList(page).subscribeOn(Schedulers.io()) //指定网络请求在IO线程
-                        //  .retryWhen(new RetryWithDelay)////遇到错误时重试
-                        .doOnSubscribe(disposable -> {
-                            if (mIsRefresh) {
-                                // mView.showLoading();//显示下拉刷新的进度条
-                                // mView
-                            } else {
-                                // mView.startLoadMore();//显示上拉加载更多的进度条
-                            }
-                        }).subscribeOn(AndroidSchedulers.mainThread())//显示进度条在主线程
-                        .observeOn(AndroidSchedulers.mainThread())     //显示数据在主线程
-                        .doFinally(() -> {
-                            if (mIsRefresh) {
-                                // mView.hideLoading();//隐藏下拉刷新的进度条
-                            } else {
-                                // mView.endLoadMore();//隐藏上拉加载更多的进度条
-                            }
-                        })
-                        // .compose(RxLifecycleUtils.bindToLifecycle(mRootView))//使用 Rxlifecycle,使 Disposable 和 Activity 一起销毁
-                        .subscribeWith(new BaseMvpObserver<BaseObj<FeedArticleListData>>(rlRefreshLayout) {
-                            @Override
-                            public void onNext(BaseObj<FeedArticleListData> listBaseObj) {
-                                FeedArticleListData data = listBaseObj.getData();
-                                showArticleList(data);
-                            }
-                        }));
+                //  .retryWhen(new RetryWithDelay)////遇到错误时重试
+                .doOnSubscribe(disposable -> {
+                    if (mIsRefresh) {
+                        // mView.showLoading();//显示下拉刷新的进度条
+                        // mView
+                    } else {
+                        // mView.startLoadMore();//显示上拉加载更多的进度条
+                    }
+                }).subscribeOn(AndroidSchedulers.mainThread())//显示进度条在主线程
+                .observeOn(AndroidSchedulers.mainThread())     //显示数据在主线程
+                .doFinally(() -> {
+                    if (mIsRefresh) {
+                        // mView.hideLoading();//隐藏下拉刷新的进度条
+                    } else {
+                        // mView.endLoadMore();//隐藏上拉加载更多的进度条
+                    }
+                })
+                // .compose(RxLifecycleUtils.bindToLifecycle(mRootView))//使用 Rxlifecycle,使 Disposable 和 Activity 一起销毁
+                .subscribeWith(new BaseMvpObserver<BaseObj<FeedArticleListData>>(rlRefreshLayout) {
+                    @Override
+                    public void onNext(BaseObj<FeedArticleListData> listBaseObj) {
+                        FeedArticleListData data = listBaseObj.getData();
+                        showArticleList(data);
+                    }
+                }));
     }
 
     @Override
@@ -138,5 +144,10 @@ public class MainPrenter extends BasePresenter<MainContract.View, MainContract.M
                     }
                 })
         );
+    }
+
+    @Override
+    public void getRecyclerView(RecyclerView recyclerView) {
+        mRecyclerView = recyclerView;
     }
 }
