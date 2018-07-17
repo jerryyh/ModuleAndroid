@@ -6,13 +6,15 @@ import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.jerry.comment_data.d_arouter.RouterURLS;
+
+
 import com.example.jerry.module_basic.base.mvp.BaseMvpListActivity;
 import com.example.jerry.module_basic.di.component.GlobalAppComponent;
 import com.example.jerry.module_basic.observer.ActivityObservable;
+
+
 import com.example.jerry.module_outsale.R;
 import com.example.jerry.module_outsale.R2;
-
-
 import com.example.jerry.module_outsale.activity.component.DaggerMainActivityComponent2;
 import com.example.jerry.module_outsale.activity.module.MainActivityModule2;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;

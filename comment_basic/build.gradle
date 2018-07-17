@@ -99,7 +99,7 @@ dependencies {
     //节操播放器
     api rootProject.ext.dependencies["jiecao"]
 
-    implementation rootProject.ext.dependencies["dagger"]
+    api rootProject.ext.dependencies["dagger"]
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
 //    implementation rootProject.ext.dependencies["dagger-android"]
 //    implementation rootProject.ext.dependencies["dagger-android-support"]
