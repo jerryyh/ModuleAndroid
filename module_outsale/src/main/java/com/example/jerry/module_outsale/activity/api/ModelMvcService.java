@@ -2,12 +2,8 @@ package com.example.jerry.module_outsale.activity.api;
 
 
 import com.example.jerry.comment_data.bean.BaseObj;
-import com.example.jerry.module_basic.base.mvp.inter.IView;
-import com.example.jerry.module_basic.net.HttpHelper;
+import com.example.jerry.module_basic.net.ApiService;
 import com.example.jerry.module_basic.net.common_callback.INetCallback;
-import com.example.jerry.module_basic.util.L;
-import com.example.jerry.module_basic.util.RxUtils;
-import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import io.reactivex.Observable;
 

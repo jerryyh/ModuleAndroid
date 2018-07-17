@@ -29,6 +29,10 @@ android {
     dataBinding {
         enabled true
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -97,10 +101,10 @@ dependencies {
 
     implementation rootProject.ext.dependencies["dagger"]
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
-    implementation rootProject.ext.dependencies["dagger-android"]
-    implementation rootProject.ext.dependencies["dagger-android-support"]
-    annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]
-    implementation rootProject.ext.dependencies["javax-annotation"]
+//    implementation rootProject.ext.dependencies["dagger-android"]
+//    implementation rootProject.ext.dependencies["dagger-android-support"]
+//    annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]
+//    implementation rootProject.ext.dependencies["javax-annotation"]
 
     implementation project(':comment_data')
 

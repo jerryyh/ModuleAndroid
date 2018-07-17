@@ -8,6 +8,11 @@ import android.support.multidex.MultiDex;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.jerry.module_basic.BuildConfig;
 import com.example.jerry.module_basic.R;
+import com.example.jerry.module_basic.di.component.AppComponent;
+import com.example.jerry.module_basic.di.component.DaggerAppComponent;
+import com.example.jerry.module_basic.di.component.GlobalAppComponent;
+import com.example.jerry.module_basic.di.module.AppModule;
+import com.example.jerry.module_basic.di.module.HttpModule;
 import com.scwang.smartrefresh.header.DeliveryHeader;
 import com.scwang.smartrefresh.header.FlyRefreshHeader;
 import com.scwang.smartrefresh.header.PhoenixHeader;
@@ -31,7 +36,7 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
  */
 
 public class BaseApplication extends Application{
-
+    private volatile static AppComponent mAppComponent;
     public static boolean IS_DEBUG = BuildConfig.DEBUG ;
     private static BaseApplication mBaseApplication ;
     //Activity管理
@@ -93,6 +98,7 @@ public class BaseApplication extends Application{
             ARouter.openLog();     // 打印日志
             ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
+        GlobalAppComponent.init(this);
         ARouter.init(this);      // 尽可能早，推荐在Application中初始化
 //        mActivityControl = new ActivityControl();
 //        //arouter路由初始化
@@ -125,6 +131,15 @@ public class BaseApplication extends Application{
 //        CrashReport.initCrashReport(getApplicationContext(), BUGLY_ID, false, strategy);
 //    }
 
+
+
+//
+//    public AppComponent getAppComponent() {
+//        return DaggerAppComponent.builder()
+//                .appModule(new AppModule(mBaseApplication))
+//                .httpModule(new HttpModule())
+//                .build();
+//    }
 
     /**
      * 程序终止的时候执行

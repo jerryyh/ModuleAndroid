@@ -9,7 +9,7 @@ import android.text.TextUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.jerry.module_outsale.R;
-import com.example.jerry.module_outsale.activity.bean.FeedArticleData;
+import com.example.jerry.comment_data.bean.FeedArticleData;
 
 import java.util.List;
 

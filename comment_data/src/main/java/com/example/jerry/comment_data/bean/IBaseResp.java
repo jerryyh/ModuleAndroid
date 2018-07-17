@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.example.jerry.module_outsale.activity.bean;
+package com.example.jerry.comment_data.bean;
 
 /** 
  * <!-- begin-UML-doc -->

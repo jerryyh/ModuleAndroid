@@ -12,6 +12,7 @@ import com.example.jerry.module_basic.base.mvp.inter.MvpCallback;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+
 /**
  * Created by jerry on 2018/7/6.
  */
@@ -22,6 +23,7 @@ public abstract class BaseMvpActivity<V extends IView, P extends IPresenter<V>> 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+//        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         unBinder = ButterKnife.bind(this);

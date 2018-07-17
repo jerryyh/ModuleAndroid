@@ -1,9 +1,10 @@
 /**
  * 
  */
-package com.example.jerry.module_outsale.activity.bean;
+package com.example.jerry.comment_data.bean;
 
 
+import java.util.List;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -12,7 +13,7 @@ package com.example.jerry.module_outsale.activity.bean;
  * @author 20003180
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public class PopupPage extends IBaseResp {
+public class PopupPageResp extends IBaseResp {
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * 背景图
@@ -154,21 +155,22 @@ public class PopupPage extends IBaseResp {
 		this.needLogin = needLogin;
 		// end-user-code
 	}
+	/**
+	 * 活动弹框新需求弹多个活动框
+	 */
+	private List<PopupPage> popupPages;
 
 	/**
-	 * 是否需要弹消息权限弹窗
-	 * 0 否
-	 * 1 是
-	 */
-	private int openNotification = 0;
-
-	public int getOpenNotification() {
-		return openNotification;
+	 * @return popupPages
+     */
+	public List<PopupPage> getPopupPages() {
+		return popupPages;
 	}
 
-	public void setOpenNotification(int openNotification) {
-		this.openNotification = openNotification;
+	/**
+	 * @param popupPages
+     */
+	public void setPopupPages(List<PopupPage> popupPages) {
+		this.popupPages = popupPages;
 	}
-
-
 }

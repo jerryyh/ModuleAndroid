@@ -1,9 +1,9 @@
-package com.example.jerry.module_outsale.activity.api;
+package com.example.jerry.module_basic.net;
 
 import com.example.jerry.comment_data.bean.BaseObj;
 import com.example.jerry.comment_data.bean.bean.BaseObj2;
-import com.example.jerry.module_outsale.activity.bean.FeedArticleListData;
-import com.example.jerry.module_outsale.activity.bean.PopupPageResp;
+import com.example.jerry.comment_data.bean.FeedArticleListData;
+import com.example.jerry.comment_data.bean.PopupPageResp;
 
 import java.util.Map;
 
@@ -24,6 +24,7 @@ import retrofit2.http.Url;
 
 public interface ApiService {
 
+    String HOST = "http://www.wanandroid.com/";
     /**
      * 首页获取feed文章列表
      *

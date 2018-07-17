@@ -9,14 +9,18 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jerry.comment_data.bean.BaseObj;
 import com.example.jerry.comment_data.bean.bean.BaseObj2;
+import com.example.jerry.comment_data.constant.BaseHost;
 import com.example.jerry.module_basic.base.mvp.BaseMvpObserver;
 import com.example.jerry.module_basic.base.mvp.BasePresenter;
+import com.example.jerry.module_basic.di.component.GlobalAppComponent;
+import com.example.jerry.module_basic.net.DataHelper;
 import com.example.jerry.module_basic.net.params.RequestMapParams;
+import com.example.jerry.module_basic.util.DeviceUtil;
 import com.example.jerry.module_basic.util.L;
 import com.example.jerry.module_basic.util.ToastUtils;
-import com.example.jerry.module_outsale.activity.bean.FeedArticleData;
-import com.example.jerry.module_outsale.activity.bean.FeedArticleListData;
-import com.example.jerry.module_outsale.activity.bean.PopupPageResp;
+import com.example.jerry.comment_data.bean.FeedArticleData;
+import com.example.jerry.comment_data.bean.FeedArticleListData;
+import com.example.jerry.comment_data.bean.PopupPageResp;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
@@ -26,6 +30,8 @@ import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+
+import static com.example.jerry.comment_data.constant.HostType.NEWS_DETAIL_HTML_PHOTO2;
 
 /**
  * Created by jerry on 2018/7/6.
@@ -37,12 +43,13 @@ public class MainPrenter extends BasePresenter<MainContract.View, MainContract.M
     private boolean mIsRefresh;
     RecyclerView mRecyclerView;
     Context mActivity;
-
+    DataHelper dataHelper;
 
     @Inject
     public MainPrenter(Context acticity, RecyclerView recyclerView) {
         this.mActivity = acticity;
         mRecyclerView = recyclerView;
+        dataHelper = GlobalAppComponent.getAppComponent().getDataHelper();
         initRecyclerView();
     }
 
@@ -101,7 +108,7 @@ public class MainPrenter extends BasePresenter<MainContract.View, MainContract.M
     @Override
     public void FeedArticleList(boolean isRefresh, SmartRefreshLayout rlRefreshLayout, int page) {
         mIsRefresh = isRefresh;
-        addDisposable(mModel.getFeedArticleList(page).subscribeOn(Schedulers.io()) //指定网络请求在IO线程
+        addDisposable(dataHelper.getFeedArticleList(page).subscribeOn(Schedulers.io()) //指定网络请求在IO线程
                 //  .retryWhen(new RetryWithDelay)////遇到错误时重试
                 .doOnSubscribe(disposable -> {
                     if (mIsRefresh) {
@@ -132,7 +139,7 @@ public class MainPrenter extends BasePresenter<MainContract.View, MainContract.M
     @Override
     public void getPopuPageResult() {
         RequestMapParams params = new RequestMapParams();
-        addDisposable(mModel.getPopuPageResult(params).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new BaseMvpObserver<BaseObj2<PopupPageResp>>() {
+        addDisposable(dataHelper.getPopupPageReault(BaseHost.getUrl(NEWS_DETAIL_HTML_PHOTO2,"snspage/popupPage"), DeviceUtil.getUserAgent(getContext()),"application/x-www-form-urlencoded; charset=utf-8",params.parmsbuild(getContext())).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new BaseMvpObserver<BaseObj2<PopupPageResp>>() {
                     @Override
                     public void onNext(BaseObj2<PopupPageResp> popupPageRespBaseObj2) {
                         ToastUtils.showShort(mActivity, "6666666");

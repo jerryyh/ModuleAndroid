@@ -3,12 +3,11 @@ package com.example.jerry.module_outsale.activity.api;
 
 import com.example.jerry.comment_data.bean.BaseObj;
 import com.example.jerry.comment_data.bean.bean.BaseObj2;
-import com.example.jerry.comment_data.constant.BaseHost;
 import com.example.jerry.comment_data.constant.HostType;
 import com.example.jerry.module_basic.net.ApiHelper;
-import com.example.jerry.module_basic.net.HttpHelper;
-import com.example.jerry.module_basic.util.RxUtils;
-import com.example.jerry.module_outsale.activity.bean.FeedArticleListData;
+import com.example.jerry.module_basic.net.ApiService;
+import com.example.jerry.module_basic.net.ServiceHelper;
+import com.example.jerry.comment_data.bean.FeedArticleListData;
 
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
@@ -38,7 +37,7 @@ public class ModelMvpService {
 
     public static <T> Observable<BaseObj<T>> getRemoteDataVp(MethodSelect<T> select) {
         //设置不同的BaseUrl
-        return select.selectM(HttpHelper.getDefault(1).create(ApiService.class))
+        return select.selectM(ServiceHelper.getDefault(1).create(ApiService.class))
 //                .compose(RxUtils.<BaseObj<T>>rxSchedulerHelper())
                 ;
     }
@@ -63,7 +62,7 @@ public class ModelMvpService {
 
     public static Observable<BaseObj<FeedArticleListData>> getFeedArticleList(int pageNum) {
         //设置不同的BaseUrl
-        Retrofit retrofit = HttpHelper.getDefault(1);
+        Retrofit retrofit = ServiceHelper.getDefault(1);
         ApiService apiService = retrofit.create(ApiService.class);
         return apiService.getFeedArticleList(pageNum);
     }

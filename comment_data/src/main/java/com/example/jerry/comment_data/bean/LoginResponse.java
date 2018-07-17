@@ -1,4 +1,4 @@
-package com.example.jerry.module_outsale.activity.bean;
+package com.example.jerry.comment_data.bean;
 
 
 import com.example.jerry.comment_data.bean.bean.BaseResponse;

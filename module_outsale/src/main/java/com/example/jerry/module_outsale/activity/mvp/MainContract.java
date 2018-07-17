@@ -9,9 +9,8 @@ import com.example.jerry.module_basic.base.mvp.inter.IModel;
 import com.example.jerry.module_basic.base.mvp.inter.IPresenter;
 import com.example.jerry.module_basic.base.mvp.inter.IView;
 import com.example.jerry.module_basic.net.params.RequestMapParams;
-import com.example.jerry.module_outsale.activity.bean.FeedArticleListData;
-import com.example.jerry.module_outsale.activity.bean.PopupPage;
-import com.example.jerry.module_outsale.activity.bean.PopupPageResp;
+import com.example.jerry.comment_data.bean.FeedArticleListData;
+import com.example.jerry.comment_data.bean.PopupPageResp;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import io.reactivex.Observable;
