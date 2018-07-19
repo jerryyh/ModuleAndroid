@@ -33,7 +33,6 @@ public class MainPrenter extends BasePresenter<MainContract.View, MainContract.M
 
     private boolean mIsRefresh;
     RecyclerView mRecyclerView;
-    Context mActivity;
     DataHelper dataHelper;
 
     @Inject
@@ -97,7 +96,7 @@ public class MainPrenter extends BasePresenter<MainContract.View, MainContract.M
         addDisposable(dataHelper.getPopupPageReault(BaseHost.getUrl(NEWS_DETAIL_HTML_PHOTO2, "snspage/popupPage"), DeviceUtil.getUserAgent(getContext()), "application/x-www-form-urlencoded; charset=utf-8", params.parmsbuild(getContext())).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new BaseMvpObserver<BaseObj2<PopupPageResp>>() {
                     @Override
                     public void onNext(BaseObj2<PopupPageResp> popupPageRespBaseObj2) {
-                        ToastUtils.showShort(mActivity, "6666666");
+                        ToastUtils.showShort(getContext(), "6666666");
                     }
 
                     @Override
