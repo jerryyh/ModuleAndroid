@@ -3,6 +3,7 @@ package com.example.jerry.module_outsale.activity.module;
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.jerry.module_basic.net.DataHelper;
 import com.example.jerry.module_outsale.activity.PerActivity;
 import com.example.jerry.module_outsale.activity.mvp.MainPrenter;
 import com.example.jerry.module_outsale.activity.mvp.MainViewActivity;
@@ -15,26 +16,11 @@ import dagger.Provides;
  */
 @Module
 public class MainActivityModule2 {
-    MainViewActivity activity;
-    RecyclerView recyclerView;
 
-    public MainActivityModule2(MainViewActivity activity, RecyclerView recyclerView) {
-        this.activity = activity;
-        this.recyclerView = recyclerView;
-    }
 
     @Provides
-    public Activity provideActivity() {
-        return activity;
+    public MainPrenter provideMainPrenter(DataHelper dataHelper) {
+       return  new MainPrenter(dataHelper);
     }
 
-    @Provides
-    public RecyclerView provideRecyclerView() {
-        return recyclerView;
-    }
-
-    @Provides
-    public MainPrenter provideMainPrenter() {
-        return new MainPrenter(activity, recyclerView);
-    }
 }

@@ -26,7 +26,7 @@ public interface MainContract {
     interface View extends IView {
 
         void showTestData(String feedArticleListData);
-
+        void showArticleList(FeedArticleListData feedArticleListData, boolean mIsRefresh);
     }
 
     interface Presenter extends IPresenter<View> {

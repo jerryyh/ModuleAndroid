@@ -1,13 +1,11 @@
 package com.example.jerry.module_outsale.activity.mvp;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jerry.comment_data.bean.BaseObj;
+import com.example.jerry.comment_data.bean.FeedArticleListData;
+import com.example.jerry.comment_data.bean.PopupPageResp;
 import com.example.jerry.comment_data.bean.bean.BaseObj2;
 import com.example.jerry.comment_data.constant.BaseHost;
 import com.example.jerry.module_basic.base.mvp.BaseMvpObserver;
@@ -18,13 +16,7 @@ import com.example.jerry.module_basic.net.params.RequestMapParams;
 import com.example.jerry.module_basic.util.DeviceUtil;
 import com.example.jerry.module_basic.util.L;
 import com.example.jerry.module_basic.util.ToastUtils;
-import com.example.jerry.comment_data.bean.FeedArticleData;
-import com.example.jerry.comment_data.bean.FeedArticleListData;
-import com.example.jerry.comment_data.bean.PopupPageResp;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -38,19 +30,15 @@ import static com.example.jerry.comment_data.constant.HostType.NEWS_DETAIL_HTML_
  */
 public class MainPrenter extends BasePresenter<MainContract.View, MainContract.Model> implements MainContract.Presenter {
 
-    private List<FeedArticleData> mFeedArticleDataList;
-    private MainListAdapter mAdapter;
+
     private boolean mIsRefresh;
     RecyclerView mRecyclerView;
     Context mActivity;
     DataHelper dataHelper;
 
     @Inject
-    public MainPrenter(Context acticity, RecyclerView recyclerView) {
-        this.mActivity = acticity;
-        mRecyclerView = recyclerView;
-        dataHelper = GlobalAppComponent.getAppComponent().getDataHelper();
-        initRecyclerView();
+    public MainPrenter(DataHelper dataHelper) {
+        this.dataHelper =dataHelper;
     }
 
     @Override
@@ -63,46 +51,13 @@ public class MainPrenter extends BasePresenter<MainContract.View, MainContract.M
         return new MainModel(this);
     }
 
-    private void initRecyclerView() {
-        if (mRecyclerView != null) {
-            mFeedArticleDataList = new ArrayList<>();
-            mAdapter = new MainListAdapter(mFeedArticleDataList);
-            mAdapter.openLoadAnimation();
-            mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                    L.d("点击了条目");
-                }
-            });
-            mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-                @Override
-                public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                    L.d("点击了子条目");
-                }
-            });
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
-            mRecyclerView.setAdapter(mAdapter);
-            mAdapter.setSpanSizeLookup(new BaseQuickAdapter.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(GridLayoutManager gridLayoutManager, int position) {
-                    return 2;
-                }
-            });
-        }
-    }
 
     private void showArticleList(FeedArticleListData feedArticleListData) {
         if (feedArticleListData == null) {
             return;
         }
         L.d("显示数据", mIsRefresh + ",showArticleList" + feedArticleListData.getDatas().get(0).getTitle());
-        if (mIsRefresh) {
-            mFeedArticleDataList = feedArticleListData.getDatas();
-            mAdapter.replaceData(mFeedArticleDataList);
-        } else {
-            mFeedArticleDataList.addAll(feedArticleListData.getDatas());
-            mAdapter.addData(feedArticleListData.getDatas());
-        }
+        mView.showArticleList(feedArticleListData, mIsRefresh);
     }
 
     @Override
@@ -139,7 +94,7 @@ public class MainPrenter extends BasePresenter<MainContract.View, MainContract.M
     @Override
     public void getPopuPageResult() {
         RequestMapParams params = new RequestMapParams();
-        addDisposable(dataHelper.getPopupPageReault(BaseHost.getUrl(NEWS_DETAIL_HTML_PHOTO2,"snspage/popupPage"), DeviceUtil.getUserAgent(getContext()),"application/x-www-form-urlencoded; charset=utf-8",params.parmsbuild(getContext())).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new BaseMvpObserver<BaseObj2<PopupPageResp>>() {
+        addDisposable(dataHelper.getPopupPageReault(BaseHost.getUrl(NEWS_DETAIL_HTML_PHOTO2, "snspage/popupPage"), DeviceUtil.getUserAgent(getContext()), "application/x-www-form-urlencoded; charset=utf-8", params.parmsbuild(getContext())).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new BaseMvpObserver<BaseObj2<PopupPageResp>>() {
                     @Override
                     public void onNext(BaseObj2<PopupPageResp> popupPageRespBaseObj2) {
                         ToastUtils.showShort(mActivity, "6666666");

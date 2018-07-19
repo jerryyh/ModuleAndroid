@@ -1,7 +1,7 @@
 ext {
-    isModule = true
+    isModule = false
     moduleSns = false
-    moduleOutSale = true
+    moduleOutSale = false
 
 
     android = [
