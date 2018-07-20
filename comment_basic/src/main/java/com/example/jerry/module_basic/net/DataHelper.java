@@ -1,10 +1,13 @@
 package com.example.jerry.module_basic.net;
 
-import com.example.jerry.comment_data.bean.BaseObj;
+import com.example.jerry.comment_data.bean.BannerData;
+
 import com.example.jerry.comment_data.bean.FeedArticleListData;
 import com.example.jerry.comment_data.bean.PopupPageResp;
+import com.example.jerry.comment_data.bean.bean.BaseObj;
 import com.example.jerry.comment_data.bean.bean.BaseObj2;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -29,5 +32,10 @@ public class DataHelper implements HttpHelper {
     @Override
     public Observable<BaseObj2<PopupPageResp>> getPopupPageReault(String url, String userAgent, String contentType, Map<String, String> map) {
         return httpHelper.getPopupPageReault(url, userAgent, contentType, map);
+    }
+
+    @Override
+    public Observable<BaseObj<List<BannerData>>> getBannerData() {
+        return httpHelper.getBannerData();
     }
 }

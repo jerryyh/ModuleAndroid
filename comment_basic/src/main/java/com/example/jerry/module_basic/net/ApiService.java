@@ -1,10 +1,12 @@
 package com.example.jerry.module_basic.net;
 
-import com.example.jerry.comment_data.bean.BaseObj;
+import com.example.jerry.comment_data.bean.BannerData;
+import com.example.jerry.comment_data.bean.bean.BaseObj;
 import com.example.jerry.comment_data.bean.bean.BaseObj2;
 import com.example.jerry.comment_data.bean.FeedArticleListData;
 import com.example.jerry.comment_data.bean.PopupPageResp;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -42,5 +44,12 @@ public interface ApiService {
             @Header("Content-Type") String contentType,
             @FieldMap Map<String, String> map
     );
-
+    /**
+     * 广告栏
+     * http://www.wanandroid.com/banner/json
+     *
+     * @return 广告栏数据
+     */
+    @GET("banner/json")
+    Observable<BaseObj<List<BannerData>>> getBannerData();
 }

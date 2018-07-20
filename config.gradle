@@ -103,5 +103,6 @@ ext {
             "tencent-bugly"                  : 'com.tencent.bugly:crashreport_upgrade:latest.release',
             //节操播放器
             "jiecao"                         : 'fm.jiecao:jiecaovideoplayer:5.7',
+            "bottom-navigation-bar"          : 'com.ashokvarma.android:bottom-navigation-bar:1.4.1',
     ]
 }

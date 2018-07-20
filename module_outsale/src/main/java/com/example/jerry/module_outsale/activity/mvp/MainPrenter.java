@@ -3,9 +3,10 @@ package com.example.jerry.module_outsale.activity.mvp;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.jerry.comment_data.bean.BaseObj;
+
 import com.example.jerry.comment_data.bean.FeedArticleListData;
 import com.example.jerry.comment_data.bean.PopupPageResp;
+import com.example.jerry.comment_data.bean.bean.BaseObj;
 import com.example.jerry.comment_data.bean.bean.BaseObj2;
 import com.example.jerry.comment_data.constant.BaseHost;
 import com.example.jerry.module_basic.base.mvp.BaseMvpObserver;
@@ -93,7 +94,11 @@ public class MainPrenter extends BasePresenter<MainContract.View, MainContract.M
     @Override
     public void getPopuPageResult() {
         RequestMapParams params = new RequestMapParams();
-        addDisposable(dataHelper.getPopupPageReault(BaseHost.getUrl(NEWS_DETAIL_HTML_PHOTO2, "snspage/popupPage"), DeviceUtil.getUserAgent(getContext()), "application/x-www-form-urlencoded; charset=utf-8", params.parmsbuild(getContext())).subscribeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new BaseMvpObserver<BaseObj2<PopupPageResp>>() {
+        addDisposable(dataHelper.getPopupPageReault(BaseHost.getUrl(NEWS_DETAIL_HTML_PHOTO2, "snspage/popupPage"), DeviceUtil.getUserAgent(getContext()), "application/x-www-form-urlencoded; charset=utf-8", params.parmsbuild(getContext()))
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new BaseMvpObserver<BaseObj2<PopupPageResp>>() {
                     @Override
                     public void onNext(BaseObj2<PopupPageResp> popupPageRespBaseObj2) {
                         ToastUtils.showShort(getContext(), "6666666");

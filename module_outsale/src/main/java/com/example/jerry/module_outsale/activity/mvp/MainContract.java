@@ -3,7 +3,8 @@ package com.example.jerry.module_outsale.activity.mvp;
 
 import android.support.v7.widget.RecyclerView;
 
-import com.example.jerry.comment_data.bean.BaseObj;
+
+import com.example.jerry.comment_data.bean.bean.BaseObj;
 import com.example.jerry.comment_data.bean.bean.BaseObj2;
 import com.example.jerry.module_basic.base.mvp.inter.IModel;
 import com.example.jerry.module_basic.base.mvp.inter.IPresenter;

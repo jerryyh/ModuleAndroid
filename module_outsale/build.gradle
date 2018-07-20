@@ -77,6 +77,9 @@ dependencies {
 
     implementation rootProject.ext.dependencies["dagger"]
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+
+    api rootProject.ext.dependencies["bottom-navigation-bar"]
+
 //    implementation rootProject.ext.dependencies["dagger-android"]
 //    implementation rootProject.ext.dependencies["dagger-android-support"]
 //    annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]

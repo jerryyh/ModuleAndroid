@@ -22,7 +22,7 @@ import io.reactivex.observers.ResourceObserver;
  * @describe ${TODO}
  */
 
-public abstract class BaseMvpObserver<T> extends ResourceObserver<T> {
+public class BaseMvpObserver<T> extends ResourceObserver<T> {
     private String mErrorMsg;
     private IView mView;
     protected IView mDialogView = null;

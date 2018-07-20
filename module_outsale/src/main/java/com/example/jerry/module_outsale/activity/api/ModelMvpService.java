@@ -1,7 +1,8 @@
 package com.example.jerry.module_outsale.activity.api;
 
 
-import com.example.jerry.comment_data.bean.BaseObj;
+
+import com.example.jerry.comment_data.bean.bean.BaseObj;
 import com.example.jerry.comment_data.bean.bean.BaseObj2;
 import com.example.jerry.comment_data.constant.HostType;
 import com.example.jerry.module_basic.net.ApiHelper;

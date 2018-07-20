@@ -46,7 +46,13 @@ public class MainActivity extends AppCompatActivity implements Observer{
                 RouterCenter.toMvpTest();
             }
         });
-
+        bt_test2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("tag","0000002");
+                RouterCenter.toOutSale();
+            }
+        });
         ActivityObservable.getInstance().registerObserver(this);
     }
 

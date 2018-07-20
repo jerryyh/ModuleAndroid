@@ -6,7 +6,7 @@
         android:allowBackup="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.mvp.mall.HomeMainActivity"></activity>
         <activity android:name=".activity.mvp.MainViewActivity"></activity>
     </application>
 

@@ -28,7 +28,7 @@ public class RouterCenter {
      * mvp页面
      */
     public static void toMvpTest() {
-        ARouter.getInstance().build(RouterURLS.MALL_MVP_ACTIVITY).navigation();
+        ARouter.getInstance().build(RouterURLS.MALL_MVP_ACTIVITY).withString("key","value").navigation();
     }
 
 }
