@@ -12,14 +12,11 @@ import com.example.jerry.comment_data.bean.FeedArticleData;
 import com.example.jerry.comment_data.bean.FeedArticleListData;
 import com.example.jerry.comment_data.d_arouter.RouterURLS;
 import com.example.jerry.module_basic.base.mvp.BaseMvpListActivity;
-
 import com.example.jerry.module_basic.di.component.GlobalAppComponent;
 import com.example.jerry.module_basic.observer.ActivityObservable;
 import com.example.jerry.module_basic.util.L;
 import com.example.jerry.module_outsale.R;
 import com.example.jerry.module_outsale.R2;
-
-
 import com.example.jerry.module_outsale.activity.component.DaggerMainActivityComponent2;
 import com.example.jerry.module_outsale.activity.module.MainActivityModule2;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -48,7 +45,6 @@ public class MainViewActivity extends BaseMvpListActivity<MainContract.View, Mai
     SmartRefreshLayout srlLayout;
     @BindView(R2.id.button)
     Button button;
-
 
 
     @Override

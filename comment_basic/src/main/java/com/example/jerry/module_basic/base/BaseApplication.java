@@ -8,13 +8,10 @@ import android.support.multidex.MultiDex;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.jerry.module_basic.BuildConfig;
 import com.example.jerry.module_basic.R;
-import com.example.jerry.module_basic.di.component.AppComponent;
-import com.example.jerry.module_basic.di.component.DaggerAppComponent;
+import com.example.jerry.module_basic.constants.ActivityControl;
 import com.example.jerry.module_basic.di.component.GlobalAppComponent;
-import com.example.jerry.module_basic.di.module.AppModule;
-import com.example.jerry.module_basic.di.module.HttpModule;
-import com.scwang.smartrefresh.header.DeliveryHeader;
-import com.scwang.smartrefresh.header.FlyRefreshHeader;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 import com.scwang.smartrefresh.header.PhoenixHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
@@ -23,10 +20,6 @@ import com.scwang.smartrefresh.layout.api.RefreshFooter;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
-import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
-import com.scwang.smartrefresh.layout.footer.FalsifyFooter;
-import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
-import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 
 /**
@@ -35,14 +28,14 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
  * @描述 ${保存全局变量设计的基本类application}
  */
 
-public class BaseApplication extends Application{
-    private volatile static AppComponent mAppComponent;
-    public static boolean IS_DEBUG = BuildConfig.DEBUG ;
-    private static BaseApplication mBaseApplication ;
-    //Activity管理
-//    private ActivityControl mActivityControl;
-//    private String BUGLY_ID = "a29fb52485" ;
+public class BaseApplication extends Application {
 
+    public static boolean IS_DEBUG = BuildConfig.DEBUG;
+    private static BaseApplication mBaseApplication;
+    //Activity管理
+    private ActivityControl mActivityControl;
+
+    //    private String BUGLY_ID = "a29fb52485" ;
     //SmartRefreshLayout 有三种方式,请参考:https://github.com/scwang90/SmartRefreshLayout
     //static 代码段可以防止内存泄露
     static {
@@ -64,19 +57,19 @@ public class BaseApplication extends Application{
         });
     }
 
-//    public ActivityControl getActivityControl() {
-//        return mActivityControl;
-//    }
+    public ActivityControl getActivityControl() {
+        return mActivityControl;
+    }
 
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        mBaseApplication = this ;
+        mBaseApplication = this;
         //MultiDex分包方法 必须最先初始化
         MultiDex.install(this);
     }
 
-    public static BaseApplication getAppContext(){
+    public static BaseApplication getAppContext() {
         return mBaseApplication;
     }
 
@@ -99,10 +92,9 @@ public class BaseApplication extends Application{
             ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
         GlobalAppComponent.init(this);
+        //arouter路由初始化
         ARouter.init(this);      // 尽可能早，推荐在Application中初始化
-//        mActivityControl = new ActivityControl();
-//        //arouter路由初始化
-//        RouterConfig.init(this, com.example.tome.component_base.BuildConfig.DEBUG);
+        mActivityControl = new ActivityControl();
 //        //bugly初始化
 //        initBugly();
 //        //AutoLayout适配初始化
@@ -111,12 +103,12 @@ public class BaseApplication extends Application{
 //        Stetho.initializeWithDefaults(this);
 //
 //        // 初始化Logger工具
-//        Logger.addLogAdapter(new AndroidLogAdapter(){
-//            @Override
-//            public boolean isLoggable(int priority, String tag) {
-//                return com.example.tome.component_base.BuildConfig.DEBUG;
-//            }
-//        });
+        Logger.addLogAdapter(new AndroidLogAdapter() {
+            @Override
+            public boolean isLoggable(int priority, String tag) {
+                return BuildConfig.DEBUG;
+            }
+        });
 //        L.i("当前是否为debug模式："+IS_DEBUG );
     }
 
@@ -132,15 +124,6 @@ public class BaseApplication extends Application{
 //    }
 
 
-
-//
-//    public AppComponent getAppComponent() {
-//        return DaggerAppComponent.builder()
-//                .appModule(new AppModule(mBaseApplication))
-//                .httpModule(new HttpModule())
-//                .build();
-//    }
-
     /**
      * 程序终止的时候执行
      */
@@ -149,15 +132,15 @@ public class BaseApplication extends Application{
         super.onTerminate();
         exitApp();
     }
+
     /**
      * 退出应用
      */
     public void exitApp() {
-//        mActivityControl.finishiAll();
+        mActivityControl.finishiAll();
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(0);
     }
-
 
     /**
      * 低内存的时候执行
@@ -168,7 +151,6 @@ public class BaseApplication extends Application{
 
     }
 
-    // 程序在内存清理的时候执行
     /**
      * 程序在内存清理的时候执行
      */

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.jerry.module_basic.base.BaseApplication;
 import com.example.jerry.module_basic.base.mvp.inter.IPresenter;
 import com.example.jerry.module_basic.base.mvp.inter.IView;
 import com.example.jerry.module_basic.base.mvp.inter.MvpCallback;
@@ -27,6 +28,8 @@ public abstract class BaseMvpActivity<V extends IView, P extends IPresenter<V>> 
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         unBinder = ButterKnife.bind(this);
+        //加入activity管理
+        BaseApplication.getAppContext().getActivityControl().addActivity(this);
         onViewCreated();
         initTitle();
         initView();
@@ -84,6 +87,8 @@ public abstract class BaseMvpActivity<V extends IView, P extends IPresenter<V>> 
         }
         setPresenter(null);
         setMvpView(null);
+        //移除类
+        BaseApplication.getAppContext().getActivityControl().removeActivity(this);
     }
 
 

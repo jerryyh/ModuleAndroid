@@ -1,5 +1,6 @@
 package com.example.jerry.module_outsale.activity.mvp.mall;
 
+import android.Manifest;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -10,6 +11,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.jerry.comment_data.d_arouter.RouterURLS;
 import com.example.jerry.module_basic.base.mvp.BaseMvpActivity;
+import com.example.jerry.module_basic.base.mvp.BaseMvpPermissionActivity;
 import com.example.jerry.module_outsale.R;
 import com.example.jerry.module_outsale.R2;
 import com.example.jerry.module_outsale.activity.mvp.book.BookFragment;
@@ -23,15 +25,15 @@ import butterknife.BindView;
  * Created by jerry on 2018/7/20.
  */
 @Route(path = RouterURLS.MALL_MAIN)
-public class HomeMainActivity extends BaseMvpActivity<HomeContract.View, HomeContract.Presenter> implements HomeContract.View, BottomNavigationBar.OnTabSelectedListener {
+public class HomeMainActivity extends BaseMvpPermissionActivity<HomeContract.View, HomeContract.Presenter> implements HomeContract.View, BottomNavigationBar.OnTabSelectedListener {
     @BindView(R2.id.fragment_group)
-    FrameLayout fragmentGroup;
+    FrameLayout          fragmentGroup;
     @BindView(R2.id.bottom_navigation_bar)
-    BottomNavigationBar mBottomNavigationBar;
+    BottomNavigationBar  mBottomNavigationBar;
     private HomeFragment mHomeFragment;
     private BookFragment mBookFragment;
     private UserFragment mUserFragment;
-    private Fragment mCurrentFragment;
+    private Fragment     mCurrentFragment;
 
     @Override
     protected void initTitle() {
@@ -46,6 +48,9 @@ public class HomeMainActivity extends BaseMvpActivity<HomeContract.View, HomeCon
     protected void initView() {
         InitNavigationBar();
         mBottomNavigationBar.selectTab(0);
+//        if (! getPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, PERMISSION_STORAGE)){
+//
+//        }
     }
 
     @Override

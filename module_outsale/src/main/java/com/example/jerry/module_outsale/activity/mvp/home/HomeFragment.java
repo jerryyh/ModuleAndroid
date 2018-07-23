@@ -36,17 +36,16 @@ import butterknife.BindView;
  */
 public class HomeFragment extends BaseMvpListFragment<HomeMvpContract.View, HomeMvpContract.Presenter> implements HomeMvpContract.View {
     @BindView(R2.id.main_pager_recycler_view)
-    RecyclerView recyclerView;
+    RecyclerView                  recyclerView;
     @BindView(R2.id.normal_view)
-    SmartRefreshLayout normalView;
+    SmartRefreshLayout            normalView;
     private List<FeedArticleData> mFeedArticleDataList;
-    private List<String> mBannerTitleList;
-    private List<String> mBannerUrlList;
-    private MainListAdapter mAdapter;
-    private Banner mBanner;
-    //引入HomeMvpPresenter对象
+    private List<String>          mBannerTitleList;
+    private List<String>          mBannerUrlList;
+    private MainListAdapter       mAdapter;
+    private Banner                mBanner;
     @Inject
-    HomeMvpPresenter presenter;
+    HomeMvpPresenter              presenter;//引入HomeMvpPresenter对象
 
     public static HomeFragment newInstance(String info) {
         Bundle args = new Bundle();
@@ -131,7 +130,6 @@ public class HomeFragment extends BaseMvpListFragment<HomeMvpContract.View, Home
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         LinearLayout mHeaderGroup = ((LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.mall_head_banner, null));
         mBanner = mHeaderGroup.findViewById(R.id.head_banner);
         mHeaderGroup.removeView(mBanner);
@@ -141,7 +139,6 @@ public class HomeFragment extends BaseMvpListFragment<HomeMvpContract.View, Home
 
     @Override
     public void showBannerData(List<BannerData> bannerDataList) {
-
         mBannerTitleList = new ArrayList<>();
         List<String> bannerImageList = new ArrayList<>();
         mBannerUrlList = new ArrayList<>();
