@@ -1,11 +1,8 @@
 package com.example.jerry.module_outsale.activity.mvp.home;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -21,7 +18,6 @@ import com.example.jerry.module_basic.util.L;
 import com.example.jerry.module_outsale.R;
 import com.example.jerry.module_outsale.R2;
 import com.example.jerry.module_outsale.activity.mvp.MainListAdapter;
-import com.example.jerry.module_outsale.activity.mvp.MainPrenter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -48,6 +44,7 @@ public class HomeFragment extends BaseMvpListFragment<HomeMvpContract.View, Home
     private List<String> mBannerUrlList;
     private MainListAdapter mAdapter;
     private Banner mBanner;
+    //引入HomeMvpPresenter对象
     @Inject
     HomeMvpPresenter presenter;
 
@@ -100,10 +97,10 @@ public class HomeFragment extends BaseMvpListFragment<HomeMvpContract.View, Home
 
     @Override
     public HomeMvpContract.Presenter createPresenter() {
-      DaggerHomeFragmentComponent.builder()
-              .appComponent(GlobalAppComponent.getAppComponent())
-              .homeFragmentModule(new HomeFragmentModule())
-              .build().inject(this);
+        DaggerHomeFragmentComponent.builder()
+                .appComponent(GlobalAppComponent.getAppComponent())
+                .homeFragmentModule(new HomeFragmentModule())
+                .build().inject(this);
         return presenter;
     }
 

@@ -10,11 +10,11 @@ import dagger.Provides;
 /**
  * Created by jerry on 2018/7/20.
  */
-
+//依赖注入是用来给应用的各部分解耦的。使应用开发更加可扩展，更容易维护
 @Module
 public class HomeFragmentModule {
-    @Provides
-    public HomeMvpPresenter provideHomeMvpPresenter(DataHelper dataHelper) {
-        return  new HomeMvpPresenter(dataHelper);
-    }
+//    @Provides
+//    public HomeMvpPresenter provideHomeMvpPresenter(DataHelper dataHelper) {
+//        return  new HomeMvpPresenter(dataHelper);
+//    }
 }

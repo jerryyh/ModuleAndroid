@@ -1,7 +1,6 @@
 package com.example.jerry.module_outsale.activity.mvp.mall;
 
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.FrameLayout;
@@ -50,10 +49,14 @@ public class HomeMainActivity extends BaseMvpActivity<HomeContract.View, HomeCon
     }
 
     @Override
-    public HomeContract.Presenter createPresenter() { return new HomePresenter(); }
+    public HomeContract.Presenter createPresenter() {
+        return new HomePresenter();
+    }
 
     @Override
-    public HomeContract.View createView() { return this; }
+    public HomeContract.View createView() {
+        return this;
+    }
 
     private void InitNavigationBar() {
         mBottomNavigationBar.setTabSelectedListener(this);
@@ -122,11 +125,16 @@ public class HomeMainActivity extends BaseMvpActivity<HomeContract.View, HomeCon
     }
 
     @Override
-    public void onTabUnselected(int position) { Log.d("onTabUnselected", "onTabUnselected: " + position); }
+    public void onTabUnselected(int position) {
+        Log.d("onTabUnselected", "onTabUnselected: " + position);
+    }
 
     @Override
-    public void onTabReselected(int position) { Log.d("onTabReselected", "onTabReselected: " + position); }
+    public void onTabReselected(int position) {
+        Log.d("onTabReselected", "onTabReselected: " + position);
+    }
 
     @Override
-    public void onPointerCaptureChanged(boolean hasCapture) { }
+    public void onPointerCaptureChanged(boolean hasCapture) {
+    }
 }

@@ -21,9 +21,11 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class HomeMvpPresenter extends BasePresenter<HomeMvpContract.View, HomeMvpContract.Model> implements HomeMvpContract.Presenter {
 
-    DataHelper dataHelper;
+    private  DataHelper dataHelper;
     private boolean mIsRefresh;
 
+
+    //创建HomeMvpPresenter对象,如果找不到被@Provides注释的方法提供对应参数对象的话，将会自动调用被@Inject注释的构造方法生成相应对象。
     @Inject
     public HomeMvpPresenter(DataHelper dataHelper) {
         this.dataHelper = dataHelper;
@@ -41,8 +43,7 @@ public class HomeMvpPresenter extends BasePresenter<HomeMvpContract.View, HomeMv
 
     @Override
     public void getBannerData(SmartRefreshLayout rlRefreshLayout) {
-        addDisposable(
-                dataHelper.getBannerData()
+        addDisposable(dataHelper.getBannerData()
                         .subscribeOn(Schedulers.io()) //指定网络请求在IO线程
                         .subscribeOn(AndroidSchedulers.mainThread())//显示进度条在主线程
                         .observeOn(AndroidSchedulers.mainThread())     //显示数据在主线程

@@ -16,7 +16,7 @@ import dagger.Component;
  * @date 2017/11/27
  */
 
-@Singleton
+@Singleton // 标明该Component中有Module使用了@Singleton
 @Component(
         modules = {
                 AppModule.class,

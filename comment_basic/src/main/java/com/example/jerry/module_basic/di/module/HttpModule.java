@@ -41,7 +41,7 @@ public class HttpModule {
 
     @Singleton
     @Provides
-    @WanAndroidUrl
+    @WanAndroidUrl//Dagger2可以通过自定义注解限定注解作用域，来管理每个对象实例的生命周期。
     Retrofit provideGeeksRetrofit(Retrofit.Builder builder, OkHttpClient client) {
         return createRetrofit(builder, client, ApiService.HOST);
     }
