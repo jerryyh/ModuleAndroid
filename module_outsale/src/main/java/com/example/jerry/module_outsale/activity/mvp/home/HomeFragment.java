@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jerry.comment_data.bean.BannerData;
 import com.example.jerry.comment_data.bean.FeedArticleData;
 import com.example.jerry.comment_data.bean.FeedArticleListData;
@@ -19,6 +19,8 @@ import com.example.jerry.module_outsale.R;
 import com.example.jerry.module_outsale.R2;
 import com.example.jerry.module_outsale.activity.mvp.MainListAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.header.TwoLevelHeader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -36,16 +38,24 @@ import butterknife.BindView;
  */
 public class HomeFragment extends BaseMvpListFragment<HomeMvpContract.View, HomeMvpContract.Presenter> implements HomeMvpContract.View {
     @BindView(R2.id.main_pager_recycler_view)
-    RecyclerView                  recyclerView;
+    RecyclerView recyclerView;
     @BindView(R2.id.normal_view)
-    SmartRefreshLayout            normalView;
+    SmartRefreshLayout normalView;
+    @BindView(R2.id.secondfloor)
+    ImageView secondfloor;
+    @BindView(R2.id.secondfloor_content)
+    ImageView secondfloorContent;
+    @BindView(R2.id.classics)
+    ClassicsHeader classics;
+    @BindView(R2.id.header)
+    TwoLevelHeader header;
     private List<FeedArticleData> mFeedArticleDataList;
-    private List<String>          mBannerTitleList;
-    private List<String>          mBannerUrlList;
-    private MainListAdapter       mAdapter;
-    private Banner                mBanner;
+    private List<String> mBannerTitleList;
+    private List<String> mBannerUrlList;
+    private MainListAdapter mAdapter;
+    private Banner mBanner;
     @Inject
-    HomeMvpPresenter              presenter;//引入HomeMvpPresenter对象
+    HomeMvpPresenter presenter;//引入HomeMvpPresenter对象
 
     public static HomeFragment newInstance(String info) {
         Bundle args = new Bundle();
@@ -69,8 +79,18 @@ public class HomeFragment extends BaseMvpListFragment<HomeMvpContract.View, Home
     protected void initView() {
         super.rlRefreshLayout = normalView;
         super.initView();
+        initRefresh();
         initRecyclerView();
         mPresenter.getBannerData(normalView);
+    }
+
+    private void initRefresh() {
+        header.setOnTwoLevelListener(refreshLayout -> {
+            Toast.makeText(getContext(), "触发二楼事件", Toast.LENGTH_SHORT).show();
+            secondfloorContent.animate().alpha(1).setDuration(2000);
+            refreshLayout.getLayout().postDelayed(()->{ header.finishTwoLevel();secondfloorContent.animate().alpha(0).setDuration(1000); }, 5000);
+            return true;//true 将会展开二楼状态 false 关闭刷新
+        });
     }
 
     @Override
@@ -117,18 +137,8 @@ public class HomeFragment extends BaseMvpListFragment<HomeMvpContract.View, Home
         mFeedArticleDataList = new ArrayList<>();
         mAdapter = new MainListAdapter(mFeedArticleDataList);
         mAdapter.openLoadAnimation();
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                L.d("点击了条目");
-            }
-        });
-        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                L.d("点击了子条目");
-            }
-        });
+        mAdapter.setOnItemClickListener((adapter, view, position) -> L.d("点击了条目"));
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> L.d("点击了子条目"));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         LinearLayout mHeaderGroup = ((LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.mall_head_banner, null));
         mBanner = mHeaderGroup.findViewById(R.id.head_banner);

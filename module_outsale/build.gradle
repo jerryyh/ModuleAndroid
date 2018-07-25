@@ -3,7 +3,7 @@ if (Boolean.valueOf(rootProject.ext.moduleOutSale)) {
 } else {
     apply plugin: 'com.android.library'
 }
-apply plugin: 'me.tatarka.retrolambda'  //lambda配置
+//apply plugin: 'me.tatarka.retrolambda'  //lambda配置
 //apply plugin: 'com.android.databinding'
 apply plugin: 'com.jakewharton.butterknife'
 //apply plugin: 'com.neenbedankt.android-apt'

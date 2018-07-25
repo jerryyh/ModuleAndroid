@@ -66,8 +66,8 @@ ext {
             //时间,地址,条件选择器
             "pickerView"                     : 'com.contrarywind:Android-PickerView:3.2.7',
             //SmartRefreshLayout
-            "smartRefreshLayout"             : 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1',
-            "SmartRefreshHeader"             : 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1',
+            "smartRefreshLayout"             : 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-11',
+            "SmartRefreshHeader"             : 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-11',
             //banner
             "banner"                         : 'com.youth.banner:banner:1.4.10',
             //eventbus
@@ -104,5 +104,7 @@ ext {
             //节操播放器
             "jiecao"                         : 'fm.jiecao:jiecaovideoplayer:5.7',
             "bottom-navigation-bar"          : 'com.ashokvarma.android:bottom-navigation-bar:1.4.1',
+
+            "lottie"                            : "com.airbnb.android:lottie:2.3.0",
     ]
 }

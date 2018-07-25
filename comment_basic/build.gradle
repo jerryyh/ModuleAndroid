@@ -103,7 +103,7 @@ dependencies {
 //    implementation rootProject.ext.dependencies["dagger-android-support"]
 //    annotationProcessor rootProject.ext.dependencies["dagger-android-processor"]
 //    implementation rootProject.ext.dependencies["javax-annotation"]
-
+    api rootProject.ext.dependencies["lottie"]
     implementation project(':comment_data')
 
 

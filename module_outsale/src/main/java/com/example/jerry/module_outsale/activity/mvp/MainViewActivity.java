@@ -3,11 +3,9 @@ package com.example.jerry.module_outsale.activity.mvp;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.jerry.comment_data.bean.FeedArticleData;
 import com.example.jerry.comment_data.bean.FeedArticleListData;
 import com.example.jerry.comment_data.d_arouter.RouterURLS;
@@ -38,7 +36,6 @@ public class MainViewActivity extends BaseMvpListActivity<MainContract.View, Mai
     MainPrenter presenter;
     private List<FeedArticleData> mFeedArticleDataList;
     private MainListAdapter mAdapter;
-    private boolean mIsRefresh;
     @BindView(R2.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R2.id.srl_layout)
@@ -114,18 +111,8 @@ public class MainViewActivity extends BaseMvpListActivity<MainContract.View, Mai
         mFeedArticleDataList = new ArrayList<>();
         mAdapter = new MainListAdapter(mFeedArticleDataList);
         mAdapter.openLoadAnimation();
-        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                L.d("点击了条目");
-            }
-        });
-        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                L.d("点击了子条目");
-            }
-        });
+        mAdapter.setOnItemClickListener((adapter, view, position) -> L.d("点击了条目"));
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> L.d("点击了子条目"));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(mAdapter);
     }

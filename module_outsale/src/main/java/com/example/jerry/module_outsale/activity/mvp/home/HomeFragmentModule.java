@@ -14,7 +14,7 @@ import dagger.Provides;
 @Module
 public class HomeFragmentModule {
 //    @Provides
-//    public HomeMvpPresenter provideHomeMvpPresenter(DataHelper dataHelper) {
+//    public HomeMvpPresenter provideHomeMvpPresenter(DataHelper dataHelper) {//如果找不到被@Provides注释的方法提供对应参数对象的话，将会自动调用被@Inject注释的构造方法生成相应对象
 //        return  new HomeMvpPresenter(dataHelper);
 //    }
 }

@@ -6,7 +6,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -19,40 +18,22 @@ import com.example.jerry.module_sns.arouter.RouterCenter;
 /**
  * 观察者对象
  */
-public class MainActivity extends AppCompatActivity implements Observer{
+public class MainActivity extends AppCompatActivity implements Observer {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sns_activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        Button bt_test = (Button)findViewById(R.id.bt_test);
-        Button bt_test2 = (Button)findViewById(R.id.bt_test2);
-        Button bt_test3 = (Button)findViewById(R.id.bt_test3);
-        Button bt_test4 = (Button)findViewById(R.id.bt_test4);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        Button bt_test  = findViewById(R.id.bt_test);
+        Button bt_test2 = findViewById(R.id.bt_test2);
+        Button bt_test3 = findViewById(R.id.bt_test3);
+        Button bt_test4 = findViewById(R.id.bt_test4);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        bt_test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("tag","000000");
-                RouterCenter.toMvpTest();
-            }
-        });
-        bt_test2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("tag","0000002");
-                RouterCenter.toOutSale();
-            }
-        });
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show());
+        bt_test.setOnClickListener(view -> { Log.i("tag", "000000");RouterCenter.toMvpTest(); });
+        bt_test2.setOnClickListener(view -> { Log.i("tag", "0000002");RouterCenter.toOutSale(); });
         ActivityObservable.getInstance().registerObserver(this);
     }
 
@@ -73,9 +54,7 @@ public class MainActivity extends AppCompatActivity implements Observer{
 
     @Override
     public void action(int id, Object... objects) {
-       if(id==1){
-           ToastUtils.showShort(this, "99999999");
-       }
+        if (id == 1) ToastUtils.showShort(this, "99999999");
     }
 
     @Override
